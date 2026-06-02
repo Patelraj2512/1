@@ -69,38 +69,6 @@ graph TD
 ---
 
 ## 2. Feature-Wise Workflows
-
-### A. Telemedicine Video Session (WebRTC Signaling)
-This sequence diagram shows how the FastAPI backend facilitates the connection between a Patient and a Doctor so they can stream video directly to each other.
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Patient as Patient App (Flutter)
-    participant Server as FastAPI Signaling Server
-    participant Doctor as Doctor App (Flutter)
-    
-    Note over Patient, Doctor: Both users join the meeting room
-    
-    Patient->>Server: Connect to ws://.../webrtc/ws/{id}/patient
-    Doctor->>Server: Connect to ws://.../webrtc/ws/{id}/doctor
-    
-    Note over Patient: Generates SDP Offer
-    Patient->>Server: Send SDP Offer
-    Server->>Doctor: Forward SDP Offer
-    
-    Note over Doctor: Generates SDP Answer
-    Doctor->>Server: Send SDP Answer
-    Server->>Patient: Forward SDP Answer
-    
-    Note over Patient, Doctor: ICE Candidate Exchange (Network Routing)
-    Patient->>Server: Send ICE Candidates
-    Server->>Doctor: Forward ICE Candidates
-    Doctor->>Server: Send ICE Candidates
-    Server->>Patient: Forward ICE Candidates
-    
-    Note over Patient, Doctor: Direct Connection Established
-    Patient<-->>Doctor: 📹 Secure P2P Audio / Video Stream 🎤
 ```
 
 ### B. AI Bot Interaction Flow
